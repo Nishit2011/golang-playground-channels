@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -31,11 +32,15 @@ func main() {
 
 	//receiving the message sent from the channel
 
-	//creating an infinte for loop
-	for {
-		//receiving is a blocking operation
-		//first arg for channel, second arg for type
-		go checkLink(<-c, c)
+	//using channel as range
+	// after the channel has returned some value
+	//it assigns the value to the variable l
+
+	for l := range c {
+		//adding delay
+		//but this will still execute indefinitely
+		time.Sleep(5 * time.Second)
+		go checkLink(l, c)
 	}
 
 }
