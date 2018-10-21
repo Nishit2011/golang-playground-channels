@@ -13,8 +13,15 @@ func main() {
 		"http://golang.org",
 	}
 
+	/*
+			when we use "go" infront a function call, it means run the function inside runs on a brand new go routine
+		And when that happens, and the code running inside the new Go Routine encounters a blockage, the control of the program goes back to the last Go routine.
+
+
+	*/
+
 	for _, link := range links {
-		checkLink(link)
+		go checkLink(link)
 	}
 }
 
