@@ -37,10 +37,12 @@ func main() {
 	//it assigns the value to the variable l
 
 	for l := range c {
-		//adding delay
-		//but this will still execute indefinitely
-		time.Sleep(5 * time.Second)
-		go checkLink(l, c)
+		//adding a function literal
+
+		go func(link string) {
+			time.Sleep(5 * time.Second)
+			checkLink(link, c)
+		}(l)
 	}
 
 }
