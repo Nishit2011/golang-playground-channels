@@ -30,7 +30,14 @@ func main() {
 	}
 
 	//receiving the message sent from the channel
-	fmt.Println(<-c)
+
+	//adding print inside a for loop because when added only once
+	//as in last case the main routine exits the function after getting one message from the channel
+	//we need main routine to keep listening to every message sent across child go routines
+	for i := 0; i < len(links); i++ {
+		fmt.Println(<-c)
+	}
+
 }
 
 //this method will check the status of the links present in the slice one by one
